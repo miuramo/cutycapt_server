@@ -13,6 +13,10 @@ if (!isset($url) || strlen($url)<5 ){
   echo "<a href=\"index.php?url=http://tobata.asia/\" >tobata.asia</a><br>";
   echo "<a href=\"index.php?url=http://tobata.asia/&x=100&y=100&w=200&h=150\" >tobata.asia +100+100_200x150</a><br>";
   echo "<a href=\"index.php?url=http://tobata.asia/&x=300&y=100&w=200&h=150\" >tobata.asia +300+100_200x150</a><br>";
+
+  echo "<h2>Links</h2>";
+  echo "<a href=\"link.php\">link.php</a> returns text/plain <br>";
+  echo "<a href=\"index.php\">index.php</a> returns image/png";
   echo "</body></html>";
   exit();
 }
@@ -21,8 +25,9 @@ if (!isset($url) || strlen($url)<5 ){
 
 // ex. 171024_123456
 $date = date("ymd_His");
+$rnd = sprintf("_%03d", rand(0,999)); // avoid duplicated filenames
 
-$fname = $date.".png";
+$fname = $date.$rnd.".png";
 
 $out = exec( 'xvfb-run --server-args="-screen 0, 1024x1024x24" cutycapt --url='.$url.' --min-width=1024 --out='.$fname );
 
@@ -32,7 +37,7 @@ if (isset($x) && isset($y) && isset($w) && isset($h)){
     $im = imagecreatefrompng($fname);
     $im2 = imagecrop($im, ['x'=>$x, 'y'=>$y, 'width'=>$w, 'height'=>$h]);
     if ($im2 !== FALSE){
-       $fname = $date."crop.png";
+       $fname = $date.$rnd."crop.png";
        imagepng($im2, $fname); 
     }
   }
