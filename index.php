@@ -19,6 +19,11 @@ if (!isset($url) || strlen($url)<5 ){
   echo "<h2>Links</h2>";
   echo "<a href=\"link.php\">link.php</a> returns text/plain <br>";
   echo "<a href=\"index.php\">index.php</a> returns image/png";
+
+  echo "<h2>OS Type</h2>";
+  echo PHP_OS;
+  echo "<br>";
+  echo php_uname();
   echo "</body></html>";
   exit();
 }
