@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('Asia/Tokyo');
+
 $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL );
 $x = filter_input(INPUT_GET, 'x', FILTER_SANITIZE_NUMBER_INT);
 $y = filter_input(INPUT_GET, 'y', FILTER_SANITIZE_NUMBER_INT);
